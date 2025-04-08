@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -11,6 +11,13 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import Logo from "../../public/logo.png";
 
 const Navbar = () => {
@@ -120,72 +127,81 @@ const Navbar = () => {
                   Servicios
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <div className="grid grid-cols-1 gap-2 p-6 md:w-[400px] lg:w-[500px]">
-                    {/* CATEGORÍA: CONSTRUCCIÓN */}
-                    <div>
-                      <h3 className="text-lg font-medium mb-1">Construcción</h3>
-                      <ul className="grid gap-1 ml-2">
-                        <li>
-                          <NavigationMenuLink
-                            href="/servicios/construccion"
-                            className="block select-none rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
-                          >
-                            <div className="text-sm font-medium">
+                  <div className="grid grid-cols-1 gap-4 p-4 md:w-[400px] lg:w-[450px]">
+                    {/* Categoría: CONSTRUCCIÓN */}
+                    <div className="space-y-2">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger className="flex w-full items-center justify-between rounded-md p-2 text-sm font-medium hover:bg-accent">
+                          <span>Construcción</span>
+                          <ChevronRight className="h-4 w-4" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="min-w-[180px]" side="right" sideOffset={0}>
+                          <DropdownMenuItem asChild>
+                            <a 
+                              href="/servicios/construccion" 
+                              className="cursor-pointer"
+                            >
                               Área de Construcción
-                            </div>
-                          </NavigationMenuLink>
-                        </li>
-                        <li>
-                          <NavigationMenuLink
-                            href="/servicios/project-manager"
-                            className="block select-none rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
-                          >
-                            <div className="text-sm font-medium">
+                            </a>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem asChild>
+                            <a 
+                              href="/servicios/project-manager" 
+                              className="cursor-pointer"
+                            >
                               Project Manager
-                            </div>
-                          </NavigationMenuLink>
-                        </li>
-                      </ul>
+                            </a>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </div>
 
-                    {/* CATEGORÍA: DISEÑO */}
-                    <div>
-                      <h3 className="text-lg font-medium mb-1">Diseño</h3>
-                      <ul className="grid gap-1 ml-2">
-                        <li>
-                          <NavigationMenuLink
-                            href="/servicios/planos-2d"
-                            className="block select-none rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
-                          >
-                            <div className="text-sm font-medium">Planos 2D</div>
-                          </NavigationMenuLink>
-                        </li>
-                        <li>
-                          <NavigationMenuLink
-                            href="/servicios/renders-3d"
-                            className="block select-none rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
-                          >
-                            <div className="text-sm font-medium">Renders 3D</div>
-                          </NavigationMenuLink>
-                        </li>
-                      </ul>
+                    {/* Categoría: DISEÑO */}
+                    <div className="space-y-2">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger className="flex w-full items-center justify-between rounded-md p-2 text-sm font-medium hover:bg-accent">
+                          <span>Diseño</span>
+                          <ChevronRight className="h-4 w-4" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="min-w-[180px]" side="right" sideOffset={0}>
+                          <DropdownMenuItem asChild>
+                            <a 
+                              href="/servicios/planos-2d" 
+                              className="cursor-pointer"
+                            >
+                              Planos 2D
+                            </a>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem asChild>
+                            <a 
+                              href="/servicios/renders-3d" 
+                              className="cursor-pointer"
+                            >
+                              Renders 3D
+                            </a>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </div>
 
-                    {/* CATEGORÍA: PERMISOS */}
-                    <div>
-                      <h3 className="text-lg font-medium mb-1">Permisos</h3>
-                      <ul className="grid gap-1 ml-2">
-                        <li>
-                          <NavigationMenuLink
-                            href="/servicios/permisos"
-                            className="block select-none rounded-md p-2 hover:bg-accent hover:text-accent-foreground"
-                          >
-                            <div className="text-sm font-medium">
+                    {/* Categoría: PERMISOS */}
+                    <div className="space-y-2">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger className="flex w-full items-center justify-between rounded-md p-2 text-sm font-medium hover:bg-accent">
+                          <span>Permisos</span>
+                          <ChevronRight className="h-4 w-4" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="min-w-[180px]" side="right" sideOffset={0}>
+                          <DropdownMenuItem asChild>
+                            <a 
+                              href="/servicios/permisos" 
+                              className="cursor-pointer"
+                            >
                               Notarización
-                            </div>
-                          </NavigationMenuLink>
-                        </li>
-                      </ul>
+                            </a>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </div>
                   </div>
                 </NavigationMenuContent>
@@ -248,7 +264,7 @@ const Navbar = () => {
           isOpen ? "translate-x-0" : "translate-x-full"
         )}
       >
-        <div className="flex flex-col items-center space-y-6 p-6">
+        <div className="flex flex-col items-center space-y-4 p-6">
           <a
             href="/"
             className="text-foreground text-lg font-medium hover:text-primary transition-colors"
@@ -257,77 +273,82 @@ const Navbar = () => {
             Inicio
           </a>
 
-          {/* Menú de Servicios con categorías */}
+          {/* Servicios con categorías desplegables */}
           <div className="w-full">
-            <div
-              className="flex justify-center items-center w-full py-2 relative cursor-pointer"
-              onClick={() => toggleSubmenu("servicios-mobile")}
-            >
-              <span className="text-foreground text-lg font-medium">
-                Servicios
-              </span>
-              <ChevronDown size={20} className="absolute right-0" />
+            <div className="text-foreground text-lg font-medium text-center mb-2">
+              Servicios
             </div>
-            <div
-              id="servicios-mobile"
-              className="overflow-hidden transition-all duration-300 ease-in-out opacity-0 max-h-0"
-            >
-              {/* Construcción */}
-              <div className="py-2 my-1">
-                <div className="font-medium text-center mb-1">Construcción</div>
-                <div className="space-y-2 bg-primary/10 rounded-lg py-2">
+
+            {/* Construcción */}
+            <Collapsible className="w-full mb-2">
+              <CollapsibleTrigger className="flex items-center justify-center w-full py-2 text-sm font-medium text-muted-foreground">
+                <span>Construcción</span>
+                <ChevronDown className="h-4 w-4 ml-1" />
+              </CollapsibleTrigger>
+              <CollapsibleContent className="bg-primary/5 rounded-md mt-1 py-2">
+                <div className="flex flex-col space-y-2">
                   <a
                     href="/servicios/construccion"
-                    className="block text-center text-muted-foreground hover:text-primary transition-colors py-1"
+                    className="px-4 py-1 text-sm text-center text-muted-foreground hover:text-primary"
                     onClick={closeMenu}
                   >
                     Área de Construcción
                   </a>
                   <a
                     href="/servicios/project-manager"
-                    className="block text-center text-muted-foreground hover:text-primary transition-colors py-1"
+                    className="px-4 py-1 text-sm text-center text-muted-foreground hover:text-primary"
                     onClick={closeMenu}
                   >
                     Project Manager
                   </a>
                 </div>
-              </div>
+              </CollapsibleContent>
+            </Collapsible>
 
-              {/* Diseño */}
-              <div className="py-2 my-1">
-                <div className="font-medium text-center mb-1">Diseño</div>
-                <div className="space-y-2 bg-primary/10 rounded-lg py-2">
+            {/* Diseño */}
+            <Collapsible className="w-full mb-2">
+              <CollapsibleTrigger className="flex items-center justify-center w-full py-2 text-sm font-medium text-muted-foreground">
+                <span>Diseño</span>
+                <ChevronDown className="h-4 w-4 ml-1" />
+              </CollapsibleTrigger>
+              <CollapsibleContent className="bg-primary/5 rounded-md mt-1 py-2">
+                <div className="flex flex-col space-y-2">
                   <a
                     href="/servicios/planos-2d"
-                    className="block text-center text-muted-foreground hover:text-primary transition-colors py-1"
+                    className="px-4 py-1 text-sm text-center text-muted-foreground hover:text-primary"
                     onClick={closeMenu}
                   >
                     Planos 2D
                   </a>
                   <a
                     href="/servicios/renders-3d"
-                    className="block text-center text-muted-foreground hover:text-primary transition-colors py-1"
+                    className="px-4 py-1 text-sm text-center text-muted-foreground hover:text-primary"
                     onClick={closeMenu}
                   >
                     Renders 3D
                   </a>
                 </div>
-              </div>
+              </CollapsibleContent>
+            </Collapsible>
 
-              {/* Permisos */}
-              <div className="py-2 my-1">
-                <div className="font-medium text-center mb-1">Permisos</div>
-                <div className="space-y-2 bg-primary/10 rounded-lg py-2">
+            {/* Permisos */}
+            <Collapsible className="w-full mb-2">
+              <CollapsibleTrigger className="flex items-center justify-center w-full py-2 text-sm font-medium text-muted-foreground">
+                <span>Permisos</span>
+                <ChevronDown className="h-4 w-4 ml-1" />
+              </CollapsibleTrigger>
+              <CollapsibleContent className="bg-primary/5 rounded-md mt-1 py-2">
+                <div className="flex flex-col space-y-2">
                   <a
                     href="/servicios/permisos"
-                    className="block text-center text-muted-foreground hover:text-primary transition-colors py-1"
+                    className="px-4 py-1 text-sm text-center text-muted-foreground hover:text-primary"
                     onClick={closeMenu}
                   >
                     Notarización
                   </a>
                 </div>
-              </div>
-            </div>
+              </CollapsibleContent>
+            </Collapsible>
           </div>
 
           <a
