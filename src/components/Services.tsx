@@ -94,38 +94,33 @@ const Services = () => {
           {services.map((service, index) => (
             <div
               key={index}
-              className={cn(
-                "bg-white rounded-lg shadow-md transition-all duration-500 hover:shadow-xl group overflow-hidden",
-                "transform hover:translate-y-[-5px]"
-              )}
+              className="group relative overflow-hidden rounded-lg shadow-md transition-all duration-500 hover:shadow-xl"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <div className="relative">
-                <AspectRatio ratio={16 / 9}>
-                  <img 
-                    src={service.imageUrl} 
-                    alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </AspectRatio>
-                <div className="absolute top-4 right-4 bg-primary text-white p-2 rounded-full">
-                  {service.icon}
+              <div className="relative h-[300px] overflow-hidden">
+                <img
+                  src={service.imageUrl}
+                  alt={service.title}
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                    <h3 className="text-white text-xl font-medium mb-2">{service.title}</h3>
+                    <p className="text-white/80 text-sm">{service.description}</p>
+                    <a 
+                      href={service.link} 
+                      className="flex items-center text-white font-medium mt-4 group-hover:text-white/80"
+                    >
+                      Ver más
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    </a>
+                  </div>
                 </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-display font-semibold mb-3 group-hover:text-primary transition-colors duration-300">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground mb-6">
-                  {service.description}
-                </p>
-                <a 
-                  href={service.link} 
-                  className="flex items-center text-primary font-medium group-hover:text-primary/80"
-                >
-                  Ver más
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </a>
+              <div className="absolute top-4 right-4">
+                <span className="bg-primary/90 text-white p-3 rounded-full flex items-center justify-center">
+                  {service.icon}
+                </span>
               </div>
             </div>
           ))}
