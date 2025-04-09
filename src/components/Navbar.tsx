@@ -23,10 +23,12 @@ import Logo from "../../public/logo.png";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const location = useLocation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
+  const toggleMobileServices = () => setMobileServicesOpen(!mobileServicesOpen);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -253,82 +255,94 @@ const Navbar = () => {
             Inicio
           </a>
 
-          {/* Servicios con acordeón para móvil */}
-          <div className="w-full">
-            <div className="text-foreground text-lg font-medium text-center mb-2">
-              Servicios
-            </div>
+          {/* Servicios dropdown para móvil */}
+          <Collapsible 
+            className="w-full" 
+            open={mobileServicesOpen} 
+            onOpenChange={toggleMobileServices}
+          >
+            <CollapsibleTrigger className="w-full flex items-center justify-center text-foreground text-lg font-medium hover:text-primary transition-colors">
+              <div className="flex items-center">
+                Servicios
+                <ChevronDown className={cn(
+                  "ml-1 h-5 w-5 transition-transform",
+                  mobileServicesOpen && "rotate-180"
+                )} />
+              </div>
+            </CollapsibleTrigger>
             
-            <Accordion type="single" collapsible className="w-full">
-              {/* Construcción */}
-              <AccordionItem value="construccion" className="border-b border-gray-200">
-                <AccordionTrigger className="py-2 text-sm font-medium text-center justify-center">
-                  Construcción
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className="flex flex-col space-y-2">
-                    <a
-                      href="/servicios/construccion"
-                      className="px-4 py-1 text-sm text-center text-muted-foreground hover:text-primary"
-                      onClick={closeMenu}
-                    >
-                      Área de Construcción
-                    </a>
-                    <a
-                      href="/servicios/project-manager"
-                      className="px-4 py-1 text-sm text-center text-muted-foreground hover:text-primary"
-                      onClick={closeMenu}
-                    >
-                      Project Manager
-                    </a>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
+            <CollapsibleContent className="mt-2 w-full">
+              <Accordion type="single" collapsible className="w-full">
+                {/* Construcción */}
+                <AccordionItem value="construccion" className="border-b border-gray-200">
+                  <AccordionTrigger className="py-2 text-sm font-medium text-center justify-center">
+                    Construcción
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="flex flex-col space-y-2">
+                      <a
+                        href="/servicios/construccion"
+                        className="px-4 py-1 text-sm text-center text-muted-foreground hover:text-primary"
+                        onClick={closeMenu}
+                      >
+                        Área de Construcción
+                      </a>
+                      <a
+                        href="/servicios/project-manager"
+                        className="px-4 py-1 text-sm text-center text-muted-foreground hover:text-primary"
+                        onClick={closeMenu}
+                      >
+                        Project Manager
+                      </a>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
 
-              {/* Diseño */}
-              <AccordionItem value="diseno" className="border-b border-gray-200">
-                <AccordionTrigger className="py-2 text-sm font-medium text-center justify-center">
-                  Diseño
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className="flex flex-col space-y-2">
-                    <a
-                      href="/servicios/planos-2d"
-                      className="px-4 py-1 text-sm text-center text-muted-foreground hover:text-primary"
-                      onClick={closeMenu}
-                    >
-                      Planos 2D
-                    </a>
-                    <a
-                      href="/servicios/renders-3d"
-                      className="px-4 py-1 text-sm text-center text-muted-foreground hover:text-primary"
-                      onClick={closeMenu}
-                    >
-                      Renders 3D
-                    </a>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
+                {/* Diseño */}
+                <AccordionItem value="diseno" className="border-b border-gray-200">
+                  <AccordionTrigger className="py-2 text-sm font-medium text-center justify-center">
+                    Diseño
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="flex flex-col space-y-2">
+                      <a
+                        href="/servicios/planos-2d"
+                        className="px-4 py-1 text-sm text-center text-muted-foreground hover:text-primary"
+                        onClick={closeMenu}
+                      >
+                        Planos 2D
+                      </a>
+                      <a
+                        href="/servicios/renders-3d"
+                        className="px-4 py-1 text-sm text-center text-muted-foreground hover:text-primary"
+                        onClick={closeMenu}
+                      >
+                        Renders 3D
+                      </a>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
 
-              {/* Permisos */}
-              <AccordionItem value="permisos" className="border-b-0">
-                <AccordionTrigger className="py-2 text-sm font-medium text-center justify-center">
-                  Permisos
-                </AccordionTrigger>
-                <AccordionContent>
-                  <div className="flex flex-col space-y-2">
-                    <a
-                      href="/servicios/permisos"
-                      className="px-4 py-1 text-sm text-center text-muted-foreground hover:text-primary"
-                      onClick={closeMenu}
-                    >
-                      Notarización
-                    </a>
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </div>
+                {/* Permisos */}
+                <AccordionItem value="permisos" className="border-b-0">
+                  <AccordionTrigger className="py-2 text-sm font-medium text-center justify-center">
+                    Permisos
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="flex flex-col space-y-2">
+                      <a
+                        href="/servicios/permisos"
+                        className="px-4 py-1 text-sm text-center text-muted-foreground hover:text-primary"
+                        onClick={closeMenu}
+                      >
+                        Notarización
+                      </a>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </CollapsibleContent>
+          </Collapsible>
 
           <a
             href="/sobre-nosotros"
